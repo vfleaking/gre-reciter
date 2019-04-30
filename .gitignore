@@ -102,3 +102,11 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+# vim
+*.swp
+
+# for GRE reciter
+data/
+pronu/
+data

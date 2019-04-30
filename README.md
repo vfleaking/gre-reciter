@@ -36,37 +36,39 @@ BU = 20
 BR = 3
 
 while True:
-	batch = empty
-	for b = 1, ..., BUN:
-		repeat
-			word = rand_word()
-		until word is not in batch and has not been chosen before
-		add the word to batch
-	for b = BUN + 1, ..., BUS:
-		repeat
-			word = random_word()
-		until word is not in batch
-		add the word to batch
-	
-	For every word that is not in the batch, calculate the minimum Edit Distance from this word to any word in batch
-	Sort the words that are not in the batch by the minimum Edit Distance, and add the first BU - BUS words to the batch
-	
-	for i = 1, ..., BR:
-		shuffle the batch randomly
-		for each word in batch:
-			show the word to the user
-			if user remembers the word, delete it from the batch
-		if batch is empty:
-			break
+    batch = empty
+    for b = 1, ..., BUN:
+        repeat
+            word = rand_word()
+        until word is not in batch and has not been seen by the user before
+        add the word to batch
+    for b = BUN + 1, ..., BUS:
+        repeat
+            word = random_word()
+        until word is not in batch
+        add the word to batch
+    
+    
+    for every word that is not in the batch:
+        dist[word] = min_{w in batch} EditDistance(word, w)
+    Sort words by dist in the increasing order and add the first BU - BUS words to the batch
+    
+    for i = 1, ..., BR:
+        shuffle the batch randomly
+        for each word in batch:
+            show the word to the user
+            if user remembers the word, delete it from the batch
+        if batch is empty:
+            break
 ```
 
 其中，`rand_word()` 的实现如下：
 ```python
 tot = 0
 for each word in words:
-	tot += word_p(word)
+    tot += word_p(word)
 
-select a word randomly from the distribution Pr[word is chosen] = word_p(word) / tot
+select a word randomly from the distribution Pr[word] = word_p(word) / tot
 ```
 请参阅代码查看 `word_p(word)` 的具体实现。你也可以写一个适合自己的版本。
 
@@ -74,5 +76,5 @@ select a word randomly from the distribution Pr[word is chosen] = word_p(word) /
 
 默认使用了 [良心 github 用户 hot13399 的一个《再要你命3000》的电子版词典](https://github.com/hot13399/FLY_US/blob/master/GRE/%E8%AF%8D%E6%B1%87/%E8%A6%81%E4%BD%A0%E5%91%BD%E4%B8%89%E5%8D%83%E7%B3%BB%E5%88%97/%E5%86%8D%E8%A6%81%E4%BD%A0%E5%91%BD3000_%E9%A1%BA%E5%BA%8F_supermemo_QA.txt) 作为词库，并使用了 [金山词霸](http://www.iciba.com/) 上的发音。如果有侵权行为我马上进行删除 QAQ
 
-# License
+## License
 GNU General Public License v3
